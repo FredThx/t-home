@@ -1,0 +1,6 @@
+Flask
+flask_httpauth
+simplejson
+Flask-Cors
+FUTIL
+mysql-connector-python
