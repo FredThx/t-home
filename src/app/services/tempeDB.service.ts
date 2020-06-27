@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams, HttpHeaders } from '@angular/common/http';
+import * as moment from 'moment';
 
 @Injectable()
 export class TempeDBService{
-  auth : string = 'invite';
+  auth : string = 'angular:ralugna!';
   api_url : string = "http://127.0.0.1:50889/tempeDB";
 
   constructor(private httpClient: HttpClient) {}
@@ -12,8 +13,8 @@ export class TempeDBService{
   get_historique(id, date_debut, date_fin, callback){
     var params: HttpParams  = new HttpParams();
     params = params.append('id',id);
-    params = params.append('date_debut',date_debut);
-    params = params.append('date_fin',date_fin);
+    params = params.append('date_debut',moment(date_debut).format("YYYY-MM-DD"));
+    params = params.append('date_fin',moment(date_fin).format("YYYY-MM-DD"));
     const headers =  new HttpHeaders({
         'Content-Type':  'application/json',
         'Access-Control-Allow-Origin':'*',

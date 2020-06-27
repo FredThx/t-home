@@ -10,10 +10,11 @@ import { TempeDBService } from '../services/tempeDB.service'
 export class ViewDatasComponent implements OnInit {
 
   id : string;
-  ids : string[] = ["test", "choix2"]; // TODO : peupler avec requette
+  ids : string[] = ["test", "Cave"]; // TODO : peupler avec requette
   date_debut : Date;
   date_fin : Date;
   data : [][];
+  auto_change : boolean = false;
 
   constructor(private tempeDBService : TempeDBService) { }
 
@@ -21,7 +22,13 @@ export class ViewDatasComponent implements OnInit {
   }
 
   update(){
-    console.log(this);
+    this.tempeDBService.get_historique(
+      this.id,
+      this.date_debut, this.date_fin,
+      (data) => {
+        this.data = data;
+      }
+      );
   }
 
 }

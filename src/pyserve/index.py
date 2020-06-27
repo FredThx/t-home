@@ -9,6 +9,7 @@ from flask_cors import CORS
 #DIVERS
 from werkzeug.security import generate_password_hash, check_password_hash
 import simplejson as json
+from datetime import datetime
 #PERSO
 from FUTIL.my_logging import *
 from tempeDB import *
@@ -43,8 +44,9 @@ def index():
 @auth.login_required
 def t_home():
     id = request.args.get('id')
-    date_debut = request.args.get('date_debut')
-    date_fin = request.args.get('date_fin')
+    date_format = "%Y-%m-%d"
+    date_debut = datetime.strptime(request.args.get('date_debut'),date_format)
+    date_fin = datetime.strptime(request.args.get('date_fin'),date_format)
     if id:
         return json.dumps(tempeDB.historique(id, date_debut, date_fin))
     else:

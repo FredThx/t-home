@@ -16,16 +16,20 @@ class TempeDB(object):
         '''Renvoie l'historique d'un capteur entre date_debut et date_fin
         sous la forme d'une liste [[date, valeur]]
         '''
+        if date_debut in ['null', 'undefined']:
+            date_debut = None
+        if date_fin in ['null', 'undefined']:
+            date_fin = None
         cursor = self.connection.cursor()
         cursor.execute('USE %s'%self.bdd)
         logging.debug("Requete sur %s : id=%s, date_debut = %s, date_fin = %s"%(self.bdd, id, date_debut, date_fin))
-        req = ("SELECT date, temperature FROM mesures WHERE capteur = %s ")
+        req = ("SELECT date, temperature FROM mesures WHERE capteur = %s")
         params = (id,)
         if date_debut:
-            req += "AND date > %s"
+            req += " AND date > %s"
             params += (date_debut,)
         if date_fin:
-            req += "AND date < %s"
+            req += " AND date < %s"
             params += (date_fin,)
         logging.debug("Req : %s %s"%(req,params))
         cursor.execute(req, params)
@@ -34,6 +38,6 @@ class TempeDB(object):
         #row_headers=[x[0] for x in cur.description]
         data = []
         for result in results:
-            data.append([str(v) for v in result])
+            data.append([str(result[0]), result[1]])
         logging.debug(data)
         return data

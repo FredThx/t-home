@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input ,SimpleChanges} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { TempeDBService } from '../services/tempeDB.service'
 
@@ -17,11 +17,15 @@ export class ViewGraphComponent implements OnInit {
 
 constructor(private tempeDBService : TempeDBService) { }
 
-  ngOnChanges() {
-    Highcharts.chart('container', this.get_options());
+  ngOnChanges(change : SimpleChanges) {
+      if ('data' in change){
+        Highcharts.chart('container', this.get_options());
+      }
   }
 
-  
+  ngOnInit(){}
+
+
   get_options(){
     var options: any = {
       Chart: {
