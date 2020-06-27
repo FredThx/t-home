@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule} from '@angular/common/http';
 
 
 import { MatFormFieldModule} from '@angular/material/form-field';
@@ -29,9 +30,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     MatFormFieldModule, MatSelectModule, MatNativeDateModule, MatDatepickerModule, MatInputModule
   ],
-  providers: [MatDatepickerModule, MatNativeDateModule],
+  providers: [MatDatepickerModule, MatNativeDateModule, TempeDBService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

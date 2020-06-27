@@ -5,8 +5,25 @@ import { HttpClient,HttpParams, HttpHeaders } from '@angular/common/http';
 export class TempeDBService{
   auth : string = 'invite';
   api_url : string = "http://127.0.0.1:50889/tempeDB";
+  private title : string;
+  private data;
 
   constructor(private httpClient: HttpClient) {}
+
+  setData(data){
+    this.data = data
+  }
+  getData(){
+    return this.data;
+  }
+
+  setTitle(title){
+    this.title = title;
+  }
+
+  getTitle(){
+    return this.title;
+  }
 
   get_historique(id, date_debut, date_fin, callback){
     var params: HttpParams  = new HttpParams();
