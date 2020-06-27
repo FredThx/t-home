@@ -9,11 +9,11 @@ import { TempeDBService } from '../services/tempeDB.service'
 })
 export class ViewDatasComponent implements OnInit {
 
-  @Input() id : string;
+  id : string;
   ids : string[] = ["test", "choix2"]; // TODO : peupler avec requette
-  @Input() date_debut : Date;
-  @Input() date_fin : Date;
-  @Input() data : [][];
+  date_debut : Date;
+  date_fin : Date;
+  data : [][];
 
   constructor(private tempeDBService : TempeDBService) { }
 
@@ -22,7 +22,6 @@ export class ViewDatasComponent implements OnInit {
 
   update(){
     console.log(this);
-    this.tempeDBService.setTitle(this.id);
   }
 
 }

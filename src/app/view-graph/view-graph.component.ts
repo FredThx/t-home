@@ -17,21 +17,18 @@ export class ViewGraphComponent implements OnInit {
 
 constructor(private tempeDBService : TempeDBService) { }
 
-  ngOnInit() {
+  ngOnChanges() {
     Highcharts.chart('container', this.get_options());
   }
 
-getTitle(){
-  return this.tempeDBService.getTitle();
-}
-
+  
   get_options(){
     var options: any = {
       Chart: {
         zoomType: 'x',
       },
       title: {
-        text: this.tempeDBService.getTitle()
+        text: this.title
       },
       credits: {
         enabled: false
