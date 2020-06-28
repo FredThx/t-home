@@ -22,8 +22,10 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button  class="btn btn-primary"
+      <button  mat-mini-fab color = "primary" disabled={{get_bt_state(1)}}
               (click)="update(id,1)">go!</button>
+      <button  mat-mini-fab color="warn"
+              (click)="raz(1)">RAZ</button>
       <mat-form-field>
         <mat-label>Capteur n°2</mat-label>
         <mat-select [(value)] = "id2">
@@ -32,8 +34,10 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-        <button  class="btn btn-primary"
+        <button  mat-mini-fab color = "primary" disabled={{get_bt_state(2)}}
                 (click)="update(id2,2)">go!</button>
+        <button  mat-mini-fab color="warn"
+                (click)="raz(2)">RAZ</button>
     </div>
   </mat-grid-tile>
   <mat-grid-tile colspan = "4">

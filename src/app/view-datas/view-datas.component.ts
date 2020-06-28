@@ -16,7 +16,7 @@ export class ViewDatasComponent implements OnInit {
   date_fin : Date;
   data : [][];
   data2 : [][];
-  auto_change : boolean = false;
+  state_bts : boolean[] = [false, false]; //false = not disabled
 
   constructor(private tempeDBService : TempeDBService) { }
 
@@ -25,11 +25,17 @@ export class ViewDatasComponent implements OnInit {
     this.tempeDBService.get_capteurs((response)=>this.ids = response);
   }
 
+ get_bt_state(index){
+   return this.state_bts[index - 1]; //Ou revoir tous les index!
+ }
+
   update(capteur, index){
+    this.state_bts[index-1]= true;
     this.tempeDBService.get_historique(
       capteur,
       this.date_debut, this.date_fin,
       (data) => {
+        this.state_bts[index-1]= false;
         if (index == 1){
           this.data = data;
         } else{
@@ -37,6 +43,13 @@ export class ViewDatasComponent implements OnInit {
         }
       }
       );
+  }
+  raz(index){
+    if (index == 1){
+      this.data = null;
+    }else{
+      this.data2 = null;
+    }
   }
 
 }
