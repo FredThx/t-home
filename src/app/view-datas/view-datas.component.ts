@@ -17,6 +17,7 @@ export class ViewDatasComponent implements OnInit {
   data : [][];
   data2 : [][];
   state_bts : boolean[] = [false, false]; //false = not disabled
+  querying : boolean = false;
 
   constructor(private tempeDBService : TempeDBService) { }
 
@@ -31,11 +32,13 @@ export class ViewDatasComponent implements OnInit {
 
   update(capteur, index){
     this.state_bts[index-1]= true;
+    this.querying = true;
     this.tempeDBService.get_historique(
       capteur,
       this.date_debut, this.date_fin,
       (data) => {
         this.state_bts[index-1]= false;
+        this.querying = false;
         if (index == 1){
           this.data = data;
         } else{
@@ -43,6 +46,11 @@ export class ViewDatasComponent implements OnInit {
         }
       }
       );
+      if (index == 1){
+        this.data = null;
+      } else{
+        this.data2 = null;
+      }
   }
   raz(index){
     if (index == 1){

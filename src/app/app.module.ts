@@ -13,6 +13,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { FormsModule } from '@angular/forms';
 
@@ -38,7 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     HttpClientModule,
     MatFormFieldModule, MatSelectModule, MatNativeDateModule, MatDatepickerModule, MatInputModule,
     MatGridListModule, MatDividerModule, MatSidenavModule, MatSlideToggleModule,
-    MatButtonModule
+    MatButtonModule, MatProgressBarModule
   ],
   providers: [MatDatepickerModule, MatNativeDateModule, TempeDBService],
   bootstrap: [AppComponent]
