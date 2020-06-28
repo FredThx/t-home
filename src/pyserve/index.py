@@ -45,12 +45,23 @@ def index():
 def t_home():
     id = request.args.get('id')
     date_format = "%Y-%m-%d"
-    date_debut = datetime.strptime(request.args.get('date_debut'),date_format)
-    date_fin = datetime.strptime(request.args.get('date_fin'),date_format)
+    try:
+        date_debut = datetime.strptime(request.args.get('date_debut'),date_format)
+    except ValueError:
+        date_debut = None
+    try:
+        date_fin = datetime.strptime(request.args.get('date_fin'),date_format)
+    except ValueError:
+        date_fin = None
     if id:
         return json.dumps(tempeDB.historique(id, date_debut, date_fin))
     else:
         return "{}"
+
+@app.route('/tempeDB/capteurs')
+@auth.login_required
+def capteurs():
+    return json.dumps(tempeDB.get_capteurs())
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=50889, debug=True)

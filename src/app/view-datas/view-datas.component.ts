@@ -10,7 +10,7 @@ import { TempeDBService } from '../services/tempeDB.service'
 export class ViewDatasComponent implements OnInit {
 
   id : string;
-  ids : string[] = ["test", "Cave"]; // TODO : peupler avec requette
+  ids : string[];
   date_debut : Date;
   date_fin : Date;
   data : [][];
@@ -19,6 +19,7 @@ export class ViewDatasComponent implements OnInit {
   constructor(private tempeDBService : TempeDBService) { }
 
   ngOnInit(): void {
+    this.tempeDBService.get_capteurs((response)=>this.ids = response);
   }
 
   update(){

@@ -14,6 +14,8 @@ export class ViewGraphComponent implements OnInit {
 
   @Input() data : [any];
   @Input() title : string;
+  @Input() data2 : [any];
+  @Input() title2 : string = "";
 
 constructor(private tempeDBService : TempeDBService) { }
 
@@ -21,6 +23,7 @@ constructor(private tempeDBService : TempeDBService) { }
       if ('data' in change){
         Highcharts.chart('container', this.get_options());
       }
+      //console.log(this.data);
   }
 
   ngOnInit(){}
@@ -28,8 +31,9 @@ constructor(private tempeDBService : TempeDBService) { }
 
   get_options(){
     var options: any = {
-      Chart: {
-        zoomType: 'x',
+      chart: {
+        zoomType: 'xy',
+        type : 'spline'
       },
       title: {
         text: this.title
@@ -43,7 +47,11 @@ constructor(private tempeDBService : TempeDBService) { }
       series: [{
         name: this.title,
         data: this.data
-    }]
+      },{
+        name : this.title2,
+        data : this.data2
+      }
+  ]
     }
     return options;
   }

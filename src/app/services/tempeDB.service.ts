@@ -10,6 +10,25 @@ export class TempeDBService{
   constructor(private httpClient: HttpClient) {}
 
 
+  get_capteurs(callback){
+    var params: HttpParams  = new HttpParams();
+    const headers =  new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Access-Control-Allow-Origin':'*',
+        'Accept' : 'application/json',
+        'Authorization': 'Basic ' + btoa(this.auth)
+      });
+      this.httpClient
+        .get<any>(this.api_url + "/capteurs" , {headers: headers})
+        .subscribe(
+          (response)=> callback(response),
+          (error)=>{
+            console.log('Erreur : ' + error);
+          }
+        );
+
+  }
+
   get_historique(id, date_debut, date_fin, callback){
     var params: HttpParams  = new HttpParams();
     params = params.append('id',id);
@@ -25,7 +44,12 @@ export class TempeDBService{
     this.httpClient
       .get<any>(this.api_url , {headers: headers, params: params})
       .subscribe(
-        (response)=>callback(response),
+        (response)=>{
+          response.forEach(element => {
+            element[0] = Date.parse(element[0]);
+          });
+          callback(response);
+          },
         (error)=>{
           console.log('Erreur : ' + error);
         }
