@@ -15,6 +15,7 @@ export class ViewDatasComponent implements OnInit {
   date_debut : Date;
   date_fin : Date;
   data : [][];
+  data2 : [][];
   auto_change : boolean = false;
 
   constructor(private tempeDBService : TempeDBService) { }
@@ -24,12 +25,16 @@ export class ViewDatasComponent implements OnInit {
     this.tempeDBService.get_capteurs((response)=>this.ids = response);
   }
 
-  update(){
+  update(capteur, index){
     this.tempeDBService.get_historique(
-      this.id,
+      capteur,
       this.date_debut, this.date_fin,
       (data) => {
-        this.data = data;
+        if (index == 1){
+          this.data = data;
+        } else{
+          this.data2 = data;
+        }
       }
       );
   }
