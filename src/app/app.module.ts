@@ -8,6 +8,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { FormsModule } from '@angular/forms';
 
@@ -31,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    MatFormFieldModule, MatSelectModule, MatNativeDateModule, MatDatepickerModule, MatInputModule
+    MatFormFieldModule, MatSelectModule, MatNativeDateModule, MatDatepickerModule, MatInputModule,
+    MatGridListModule, MatDividerModule, MatSidenavModule
   ],
   providers: [MatDatepickerModule, MatNativeDateModule, TempeDBService],
   bootstrap: [AppComponent]
